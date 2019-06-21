@@ -13,7 +13,7 @@ class TabLink {
       console.log('this.cards', this.cards)
     } else {
 
-      this.cards = 
+      this.cards = document.querySelectorAll(`.card[data-tab="${this.tabData}"]`); 
       
     }
 
