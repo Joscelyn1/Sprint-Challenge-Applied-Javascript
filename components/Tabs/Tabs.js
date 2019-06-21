@@ -1,5 +1,5 @@
 class TabLink {
-  constructor(tabElement){
+  constructor(tabElement) {
     // assign this.tabElement to the tabElement DOM reference
     this.tabElement = tabElement;
     console.log('this.tabElement', this.tabElement);
@@ -11,20 +11,38 @@ class TabLink {
     if (this.tabData === 'all') {
       this.cards = document.querySelectorAll('.card');
       console.log('this.cards', this.cards)
-    } else {
+    } else this.cards = document.querySelectorAll(`.card[data-tab="${this.tabData}"]`);
+    
+    this.cards = Array.from(this.cards).forEach((card) => {
+      card = new TabCard(card);
+    })
+    
+    this.tabElement.addEventListener('click', () => {
+      this.selectTab();
+    });
+  }
 
-      this.cards = document.querySelectorAll(`.card[data-tab="${this.tabData}"]`); 
-      
-    }
+  selectTab() {
+
+    const tabs = document.querySelectorAll('.tab');
+
+    tabs.forEach( tab => {
+      tab.classList.remove('.active-tag');
+    })
 
   }
 }
-    
 
-    
-    // We need to find out if a user clicked 'all' cards or a specific category.  Follow the instructions below to accomplish this task:    
-    
-    /* <- Delete this comment block when you work on the if statement
+class TabCard {
+  constructor() {
+
+  }
+}
+
+
+  // We need to find out if a user clicked 'all' cards or a specific category.  Follow the instructions below to accomplish this task:    
+
+  /* <- Delete this comment block when you work on the if statement
     // Check to see if this.tabData is equal to 'all'
     if(){
       // If `all` is true, select all cards regardless of their data attribute values
@@ -86,4 +104,4 @@ class TabCard {
 
 */
 
-let tabs = document.querySelectorAll('.tab').forEach( tab => new TabLink(tab));
+  let tabs = document.querySelectorAll('.tab').forEach(tab => new TabLink(tab));
